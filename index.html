@@ -10,7 +10,7 @@
 <link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261111010739">
+<link rel="stylesheet" href="assets/css/style.css?v=20261111013420">
 <style>
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;color:#fff;overflow:hidden;padding:130px 0 90px}
@@ -295,8 +295,8 @@
 
 <div id="rodape"></div>
 
-<script src="assets/js/data.js?v=20261111010739"></script>
-<script src="assets/js/site.js?v=20261111010739"></script>
+<script src="assets/js/data.js?v=20261111013420"></script>
+<script src="assets/js/site.js?v=20261111013420"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const S = window.VULK_SITE, V = window.VULK;
@@ -361,9 +361,9 @@ document.addEventListener('DOMContentLoaded', () => {
       m.classList.toggle('vivo', vivo);
       if (mr.top < innerHeight * (innerWidth < 900 ? .4 : .6)) ano = m.dataset.ano === 'hoje' ? atual : +m.dataset.ano;
     });
-    if (+anoNum.textContent !== ano) contar(+anoNum.textContent, ano);
+    if (ano !== alvoAno) { alvoAno = ano; contar(+anoNum.textContent, ano); }
   }
-  let anim;
+  let anim, alvoAno = 2010;
   function contar(de, ate) {
     cancelAnimationFrame(anim); const t0 = performance.now();
     const passo = (t) => { const q = Math.min(1, (t - t0) / 600); anoNum.textContent = Math.round(de + (ate - de) * q); if (q < 1) anim = requestAnimationFrame(passo); };

@@ -236,7 +236,8 @@
 .previa .bilhete .rota span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .previa .bilhete .cidades{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;color:var(--cinza);margin-top:2px}
 .previa .bilhete .cidades span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.previa .bilhete dd{overflow-wrap:anywhere}
+.previa .bilhete dd{white-space:nowrap;font-size:.95rem;overflow:hidden;text-overflow:ellipsis}
+.previa .bilhete dl{gap:10px}
 .previa .bilhete .vazio-campo{color:var(--prata)}
 .previa .canhoto .mono{color:var(--cinza)}
 .previa .canhoto .pax{font-family:var(--serif);font-size:2.4rem;color:var(--petroleo);line-height:1}
