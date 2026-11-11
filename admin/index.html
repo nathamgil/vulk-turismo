@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel · Vulk Turismo</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Jost:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css?v=20261111010739">
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section id="login" class="login" hidden>
+  <div class="login-foto" aria-hidden="true">
+    <img src="../img/airport-2.jpg" alt="">
+    <div class="login-foto-txt">
+      <span class="mono-claro">Painel da equipe · desde 2010</span>
+      <p>Cada cotação acompanhada<br>até o embarque.</p>
+    </div>
+  </div>
+  <div class="login-lado">
+    <form id="form-login" class="login-cartao" autocomplete="off">
+      <img src="../img/logo.png" alt="Vulk Turismo" class="login-logo">
+      <span class="eyebrow">Painel administrativo</span>
+      <h1>Bem-vindo de volta</h1>
+      <p class="login-aviso"><strong>Acesso de demonstração.</strong> Os dados abaixo já estão preenchidos e tudo o que você mexer fica salvo só neste navegador.</p>
+      <label class="campo"><span>E-mail</span><input type="email" name="email" value="equipe@vulkturismo.com.br" required></label>
+      <label class="campo"><span>Senha</span><input type="password" name="senha" value="demo" required></label>
+      <button class="btn btn-primario btn-grande" type="submit">Entrar no painel</button>
+      <div class="login-picote"><span class="mono">VK · SSA</span><span class="mono">Portão 01</span></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app" class="app" hidden>
+  <aside class="lateral" id="lateral">
+    <a class="lateral-marca" href="#/visao">
+      <span class="lateral-logo"><img src="../img/logo.png" alt=""></span>
+      <span><strong>Vulk Turismo</strong><small>Painel da equipe</small></span>
+    </a>
+    <nav id="nav" class="nav" aria-label="Seções do painel"></nav>
+    <div class="lateral-pe">
+      <a class="nav-item" href="../index.html" target="_blank" rel="noopener"><span class="ico" data-ico="externo"></span><span>Ver o site</span></a>
+      <button class="nav-item" id="btn-sair" type="button"><span class="ico" data-ico="sair"></span><span>Sair</span></button>
+    </div>
+  </aside>
+
+  <header class="topo-mobile">
+    <span class="lateral-logo"><img src="../img/logo.png" alt=""></span>
+    <strong id="titulo-mobile">Visão geral</strong>
+    <button class="btn-icone" id="btn-sair-m" type="button" aria-label="Sair" data-ico="sair"></button>
+  </header>
+
+  <main id="tela" class="tela" tabindex="-1"></main>
+
+  <nav class="barra-inferior" id="barra-inferior" aria-label="Navegação"></nav>
+  <div class="menu-mais" id="menu-mais" hidden></div>
+</div>
+
+<!-- Gaveta lateral, modal, toasts e área de impressão -->
+<div class="veu" id="veu" hidden></div>
+<aside class="gaveta" id="gaveta" aria-hidden="true" role="dialog" aria-modal="true"></aside>
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true"><div class="modal-caixa" id="modal-caixa"></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div id="impressao" class="impressao"></div>
+
+<script src="../assets/js/data.js?v=20261111010739"></script>
+<script src="nucleo.js?v=20261111010739"></script>
+<script src="visao.js?v=20261111010739"></script>
+<script src="cotacoes.js?v=20261111010739"></script>
+<script src="pacotes.js?v=20261111010739"></script>
+<script src="telas.js?v=20261111010739"></script>
+<script src="admin.js?v=20261111010739"></script>
+</body>
+</html>

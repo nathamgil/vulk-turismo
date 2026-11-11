@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de destinos — Vulk Turismo</title>
+<meta name="description" content="Guia de destinos curiosos da Vulk Turismo: lagos rosa, ilhas de dragões, desertos que florescem e outros lugares que você nem imagina.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261111010739"><link rel="stylesheet" href="assets/css/paginas.css?v=20261111010739">
+</head>
+<body data-topo="transp">
+<div id="topo"></div>
+
+<section class="page-hero">
+  <div class="bg" style="background-image:url(img/hillier.jpg)"></div>
+  <div class="wrap">
+    <div class="migalha"><a href="index.html">Início</a> &nbsp;/&nbsp; Destinos</div>
+    <h1>Guia de destinos <em>curiosos</em></h1>
+    <p class="lead">As curiosidades que a Vulk publica no Instagram, reunidas num só lugar para você salvar, sonhar e planejar.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="intro-guia rv">
+      <div>
+        <div class="eyebrow">Você sabia?</div>
+        <h2 style="margin-top:14px">O mundo ainda guarda lugares que você nem <em>imagina</em>.</h2>
+      </div>
+      <div>
+        <p>Um lago cor-de-rosa na Austrália. Uma ilha onde vivem dragões. Um deserto que, em alguns anos, amanhece coberto de flores.</p>
+        <p>Cada destino abaixo saiu de um post da Vulk. Se algum deles fizer o coração bater mais rápido, a gente transforma em roteiro.</p>
+      </div>
+    </div>
+    <div class="guia" id="guia"></div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="bg" style="background-image:url(img/airport-2.jpg)"></div>
+  <div class="wrap">
+    <div class="eyebrow">Da tela para a janela do avião</div>
+    <h2>Viu um lugar e não sai da <em>cabeça</em>?</h2>
+    <p class="lead">Mande o destino na cotação. A Vulk pesquisa a melhor época, o caminho a partir de Salvador e monta a proposta.</p>
+    <a class="btn btn-ouro" href="cotacao.html">Fazer minha cotação</a>
+  </div>
+</section>
+
+<div id="rodape"></div>
+<script src="assets/js/data.js?v=20261111010739"></script><script src="assets/js/site.js?v=20261111010739"></script>
+<script>
+(function () {
+  const V = window.VULK, S = window.VULK_SITE;
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const ig = 'https://instagram.com/' + (S.cfg.instagram || 'vulkturismo');
+  const data = (d) => { const [dd, mm, aa] = String(d || '').split('/'); return aa ? new Date(+aa, +mm - 1, +dd).getTime() : 0; };
+  const lista = V.ler('destinos').slice().sort((a, b) => data(b.post) - data(a.post));
+  const guia = document.getElementById('guia');
+  if (!lista.length) { guia.innerHTML = '<div class="vazio">Em breve, novos destinos curiosos por aqui.</div>'; return; }
+  guia.innerHTML = lista.map((d, i) => `
+    <article class="destino" id="${esc(d.id)}">
+      <div class="foto-d rv"><img src="img/${esc(d.img)}.jpg" alt="${esc(d.nome)}, ${esc(d.pais)}" loading="lazy"><span class="local">${esc(d.pais)}</span></div>
+      <div class="rv d1">
+        <div class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</div>
+        <div class="nome">${esc(d.nome)}</div>
+        <h3>${esc(d.titulo)}</h3>
+        <p class="txt">${esc(d.texto)}</p>
+        <a class="btn btn-petroleo" href="cotacao.html?destino=${encodeURIComponent(d.nome + ', ' + d.pais)}">Quero conhecer ${S.ICONE.seta}</a>
+        ${d.post ? `<p class="fonte">Publicado no Instagram em ${esc(d.post)} · <a href="${ig}" target="_blank" rel="noopener">@${esc(S.cfg.instagram || 'vulkturismo')}</a></p>` : ''}
+      </div>
+    </article>`).join('');
+  S.revelar(guia);
+})();
+</script>
+</body>
+</html>

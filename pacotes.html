@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pacotes — Vulk Turismo</title>
+<meta name="description" content="Pacotes nacionais e internacionais da Vulk Turismo, com saída de Salvador. Cada roteiro é ajustado às suas datas, hotel e estilo de viagem.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261111010739"><link rel="stylesheet" href="assets/css/paginas.css?v=20261111010739">
+</head>
+<body data-topo="transp">
+<div id="topo"></div>
+
+<section class="page-hero">
+  <div class="bg" style="background-image:url(img/maragogi.jpg)"></div>
+  <div class="wrap">
+    <div class="migalha"><a href="index.html">Início</a> &nbsp;/&nbsp; Pacotes</div>
+    <h1>Roteiros prontos para virar <em>seus</em></h1>
+    <p class="lead">Do Nordeste ao outro lado do mundo, com saída de Salvador e alguém da Vulk cuidando de cada detalhe.</p>
+  </div>
+</section>
+
+<section class="sec-curta">
+  <div class="wrap ajuste rv">
+    <div>
+      <div class="eyebrow">Como funciona</div>
+      <h2 style="margin-top:14px">Nenhum pacote sai <em>igual</em> ao da vitrine.</h2>
+      <p>Os roteiros abaixo são o ponto de partida. Na cotação, a gente ajusta tudo ao seu jeito de viajar e manda a proposta pelo WhatsApp.</p>
+    </div>
+    <ul>
+      <li><b>DATAS</b><span>Você escolhe quando ir e por quantas noites ficar.</span></li>
+      <li><b>HOTEL</b><span>Da pousada charmosa ao resort, conforme o seu orçamento.</span></li>
+      <li><b>SAÍDA SSA</b><span>Voos a partir de Salvador, com os horários que você prefere.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="filtros rv" role="region" aria-label="Filtrar pacotes">
+      <div class="linha"><span class="rotulo">Região</span><div class="chips" id="fRegiao"></div></div>
+      <div class="linha"><span class="rotulo">Estilo</span><div class="chips" id="fEstilo"></div></div>
+      <div class="base">
+        <span class="conta" id="conta" aria-live="polite"></span>
+        <div class="ordem">
+          <label for="ordem">Ordenar</label>
+          <select id="ordem">
+            <option value="destaque">Destaques primeiro</option>
+            <option value="az">Nome (A–Z)</option>
+            <option value="curta">Menos noites</option>
+            <option value="longa">Mais noites</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="grade-pacotes" id="grade"></div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="bg" style="background-image:url(img/map.jpg)"></div>
+  <div class="wrap">
+    <div class="eyebrow">Não achou o seu?</div>
+    <h2>Conte o destino e a gente monta do <em>zero</em>.</h2>
+    <p class="lead">Passagem, hotel ou o pacote completo. A cotação leva dois minutos e a resposta chega no seu WhatsApp.</p>
+    <a class="btn btn-ouro" href="cotacao.html">Fazer minha cotação</a>
+  </div>
+</section>
+
+<div id="rodape"></div>
+<script src="assets/js/data.js?v=20261111010739"></script><script src="assets/js/site.js?v=20261111010739"></script>
+<script>
+(function () {
+  const V = window.VULK, S = window.VULK_SITE;
+  const todos = V.ler('pacotes').filter((p) => p.publicado);
+  const qs = new URLSearchParams(location.search);
+  const estado = { regiao: qs.get('regiao') || 'todos', estilo: qs.get('estilo') || 'todos', ordem: 'destaque' };
+  const regioes = [['todos', 'Todos'], ['nacional', 'Nacionais'], ['internacional', 'Internacionais']];
+  const ordemEstilos = ['Praia', 'Natureza', 'Família', 'Cultura', 'Lua de mel', 'Neve', 'Aventura'];
+  const estilos = [...new Set(todos.map((p) => p.estilo).filter(Boolean))]
+    .sort((a, b) => { const ia = ordemEstilos.indexOf(a), ib = ordemEstilos.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b); });
+
+  const chip = (grupo, v, t) => `<button type="button" class="chip" data-g="${grupo}" data-v="${v}" aria-pressed="${estado[grupo] === v}">${t}</button>`;
+  document.getElementById('fRegiao').innerHTML = regioes.map(([v, t]) => chip('regiao', v, t)).join('');
+  document.getElementById('fEstilo').innerHTML = chip('estilo', 'todos', 'Todos') + estilos.map((e) => chip('estilo', e, e)).join('');
+
+  document.querySelector('.filtros').addEventListener('click', (ev) => {
+    const b = ev.target.closest('.chip'); if (!b) return;
+    estado[b.dataset.g] = b.dataset.v;
+    document.querySelectorAll(`.chip[data-g="${b.dataset.g}"]`).forEach((c) => c.setAttribute('aria-pressed', c === b));
+    desenhar();
+  });
+  document.getElementById('ordem').onchange = (e) => { estado.ordem = e.target.value; desenhar(); };
+
+  function desenhar() {
+    let lista = todos.filter((p) => (estado.regiao === 'todos' || p.regiao === estado.regiao) && (estado.estilo === 'todos' || p.estilo === estado.estilo));
+    const o = estado.ordem;
+    lista.sort((a, b) => o === 'az' ? a.titulo.localeCompare(b.titulo) : o === 'curta' ? a.noites - b.noites : o === 'longa' ? b.noites - a.noites : (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0));
+    const n = lista.length;
+    document.getElementById('conta').textContent = String(n).padStart(2, '0') + (n === 1 ? ' pacote' : ' pacotes');
+    const grade = document.getElementById('grade');
+    grade.innerHTML = n ? lista.map(S.cardPacote).join('') :
+      `<div class="vazio" style="grid-column:1/-1"><p style="font-family:var(--serif);font-size:1.5rem;color:var(--petroleo)">Nenhum pacote com esse filtro por enquanto.</p>
+       <p style="margin:8px 0 20px">Mas a Vulk monta essa viagem sob medida para você.</p>
+       <a class="btn btn-petroleo" href="cotacao.html">Pedir cotação</a></div>`;
+    S.revelar(grade);
+  }
+  desenhar();
+})();
+</script>
+</body>
+</html>

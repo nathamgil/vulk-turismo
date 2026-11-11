@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vulk Turismo — Viagens que começam no planejamento</title>
+<meta name="description" content="Agência de viagens em Salvador desde 2010. Passagens, hotéis e pacotes de lazer e corporativos, com atendimento personalizado.">
+<meta property="og:title" content="Vulk Turismo — Viagens que começam no planejamento">
+<meta property="og:image" content="img/airport.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261111010739">
+<style>
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;color:#fff;overflow:hidden;padding:130px 0 90px}
+.hero .bg{position:absolute;inset:-4%;background:url(img/airport.jpg) center/cover;animation:respira 22s ease-in-out infinite alternate}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,37,48,.92) 0%,rgba(8,37,48,.7) 45%,rgba(8,37,48,.15) 100%)}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:60px;align-items:end}
+.hero h1{color:#fff}
+.hero h1 .linha{display:block;overflow:hidden}
+.hero h1 .linha span{display:inline-block;transform:translateY(105%);animation:sobe 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .linha:nth-child(2) span{animation-delay:.15s}
+.hero h1 .linha:nth-child(3) span{animation-delay:.3s}
+@keyframes sobe{to{transform:none}}
+.hero .lead{color:#d6e2e5;margin:26px 0 36px}
+.hero .acoes{display:flex;gap:14px;flex-wrap:wrap}
+.hero .bilhete{transform:rotate(-2.5deg);animation:pousa 1.2s .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pousa{from{opacity:0;transform:translateY(60px) rotate(-8deg)}}
+.hero .bilhete .rota .q{color:var(--ouro);font-style:italic}
+.hero .rolar{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:#cfdde1;display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero .rolar::after{content:"";width:1px;height:40px;background:linear-gradient(#cfdde1,transparent);animation:pinga 2s infinite}
+@keyframes pinga{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:40px}.hero .bilhete{transform:rotate(-1.5deg);max-width:440px}.hero::after{background:linear-gradient(180deg,rgba(8,37,48,.75),rgba(8,37,48,.92))}}
+@media(max-width:480px){.bilhete{grid-template-columns:minmax(0,1fr) 92px}.bilhete::before,.bilhete::after{right:81px}.bilhete .corpo{padding:18px}.bilhete .canhoto{padding:16px 12px}.bilhete .rota{font-size:1.5rem}.bilhete dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- Manifesto: palavras acendem com a rolagem ---------- */
+.manifesto{padding:140px 0 120px}
+.manifesto p.frase{font-family:var(--serif);font-size:clamp(1.9rem,4.3vw,3.6rem);line-height:1.18;color:var(--petroleo);max-width:22ch}
+.manifesto p.frase .w{opacity:.14;transition:opacity .25s}
+.manifesto p.frase .w.on{opacity:1}
+.manifesto p.frase .w.ouro{color:var(--ouro);font-style:italic}
+.manifesto .assina{margin-top:34px;font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:var(--cinza);text-transform:uppercase}
+
+/* ---------- História em rolagem ---------- */
+.historia{background:var(--petroleo);color:#e2eaec}
+.historia .grade{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px}
+.historia .fixo{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center}
+.historia .ano{font-family:var(--serif);font-size:clamp(5rem,13vw,11rem);line-height:.9;color:#fff;font-variant-numeric:tabular-nums}
+.historia .ano small{display:block;font-family:var(--mono);font-size:.8rem;letter-spacing:.22em;color:var(--ouro-claro);margin-bottom:16px;text-transform:uppercase}
+.historia .barra{height:2px;background:rgba(255,255,255,.15);margin-top:34px;max-width:420px;position:relative}
+.historia .barra i{position:absolute;inset:0 auto 0 0;background:var(--ouro);width:0}
+.historia .barra b{position:absolute;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;color:var(--ouro-claro);left:0}
+.historia .marcos{padding:30vh 0 20vh}
+.marco{min-height:62vh;display:flex;flex-direction:column;justify-content:center;opacity:.25;transition:opacity .6s}
+.marco.vivo{opacity:1}
+.marco .data{font-family:var(--mono);font-size:.8rem;letter-spacing:.2em;color:var(--ouro-claro);text-transform:uppercase}
+.marco h3{color:#fff;font-size:clamp(1.9rem,3.4vw,2.8rem);margin:14px 0 16px}
+.marco p{color:#bccdd2;font-size:1.12rem;max-width:44ch}
+.marco figure{margin-top:26px;border-radius:var(--raio);overflow:hidden;max-width:520px;aspect-ratio:16/10}
+.marco figure img{width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){.historia .grade{grid-template-columns:minmax(0,1fr);gap:0}.historia .fixo{height:auto;position:sticky;top:64px;z-index:3;background:var(--petroleo);padding:18px 0 14px;flex-direction:row;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.12)}.historia .ano{font-size:3.4rem}.historia .ano small{margin-bottom:4px;font-size:.66rem}.historia .barra{flex:1;margin:0}.historia .marcos{padding:6vh 0 10vh}.marco{min-height:auto;padding:60px 0;opacity:1}}
+
+/* ---------- Como planejamos ---------- */
+.etapas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:60px;border-top:1.5px dashed var(--linha)}
+.etapa{padding:30px 26px 10px 0;position:relative}
+.etapa::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;border-radius:50%;background:var(--ouro);box-shadow:0 0 0 5px var(--creme)}
+.etapa .cod{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;color:var(--ouro-texto)}
+.etapa h3{margin:10px 0 10px;font-size:1.55rem}
+.etapa p{color:var(--cinza)}
+@media(max-width:900px){.etapas{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px}}
+@media(max-width:520px){.etapas{grid-template-columns:minmax(0,1fr);border-top:0;border-left:1.5px dashed var(--linha);margin-left:7px}.etapa{padding:0 0 30px 28px}.etapa::before{top:6px;left:-8px}}
+
+.cabeca{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:54px}
+.cabeca h2{margin-top:14px;max-width:16ch}
+
+/* ---------- Faixa de destinos ---------- */
+.faixa{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 26px;scrollbar-width:thin;scrollbar-color:var(--ouro) transparent}
+.faixa::-webkit-scrollbar{height:6px}.faixa::-webkit-scrollbar-thumb{background:var(--ouro);border-radius:6px}
+.postal{flex:0 0 min(340px,78vw);scroll-snap-align:start;position:relative;aspect-ratio:3/4;border-radius:var(--raio);overflow:hidden;color:#fff;text-decoration:none}
+.postal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s}
+.postal:hover img{transform:scale(1.06)}
+.postal::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,37,48,.9))}
+.postal .txt{position:absolute;inset:auto 0 0 0;padding:24px;z-index:2}
+.postal .pais{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--ouro-palido);text-transform:uppercase}
+.postal h3{color:#fff;font-size:1.5rem;margin-top:8px}
+.postal .carimbo{position:absolute;top:18px;right:18px;z-index:2;width:74px;height:74px;border:2px solid rgba(255,255,255,.75);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;line-height:1.3;transform:rotate(12deg);color:#fff}
+
+/* ---------- Serviços ---------- */
+.servicos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1.5px solid var(--linha);border-radius:var(--raio);overflow:hidden;background:#fff}
+.servico{padding:30px 22px;border-right:1.5px solid var(--linha)}
+.servico:last-child{border-right:0}
+.servico .n{font-family:var(--serif);font-size:2.4rem;color:var(--ouro)}
+.servico h3{font-size:1.25rem;margin:6px 0 8px}
+.servico p{color:var(--cinza);font-size:.95rem}
+@media(max-width:980px){.servicos{grid-template-columns:repeat(2,minmax(0,1fr))}.servico{border-bottom:1.5px solid var(--linha)}}
+@media(max-width:520px){.servicos{grid-template-columns:minmax(0,1fr)}.servico{border-right:0}}
+
+/* ---------- Corporativo ---------- */
+.corp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:620px}
+.corp .foto{background:url(img/business.jpg) center/cover;min-height:360px}
+.corp .txt{background:var(--noite);color:#d4e0e3;padding:90px 8%;display:flex;flex-direction:column;justify-content:center}
+.corp h2{color:#fff;margin:16px 0 20px}
+.corp ul{list-style:none;margin:26px 0 36px;display:grid;gap:12px}
+.corp li{display:flex;gap:14px;align-items:baseline;border-bottom:1px dashed rgba(255,255,255,.16);padding-bottom:12px}
+.corp li b{font-family:var(--mono);font-size:.72rem;color:var(--ouro-claro);letter-spacing:.14em;font-weight:500;min-width:40px}
+@media(max-width:900px){.corp{grid-template-columns:minmax(0,1fr)}.corp .txt{padding:70px 22px}}
+
+/* ---------- Depoimentos ---------- */
+.depo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.depo blockquote{background:#fff;border-radius:var(--raio);padding:30px;border-top:3px solid var(--ouro)}
+.depo blockquote p{font-family:var(--serif);font-size:1.2rem;color:var(--petroleo)}
+.depo cite{display:block;margin-top:18px;font-style:normal;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza)}
+@media(max-width:860px){.depo{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body data-topo="transp">
+<div id="topo"></div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="bg" role="img" aria-label="Asa de avião sobre as nuvens"></div>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow claro">Agência de viagens · Salvador · desde 2010</p>
+        <h1 style="margin-top:22px">
+          <span class="linha"><span>Toda viagem</span></span>
+          <span class="linha"><span>começa no</span></span>
+          <span class="linha"><span><em>planejamento.</em></span></span>
+        </h1>
+        <p class="lead">Passagens, hotéis e pacotes de lazer e corporativos. A Vulk cuida dos detalhes, do primeiro orçamento ao embarque, para você aproveitar o que importa: a experiência de viajar.</p>
+        <div class="acoes">
+          <a class="btn btn-ouro" href="cotacao.html">Fazer minha cotação <span id="ic1"></span></a>
+          <a class="btn btn-linha claro" href="pacotes.html">Ver pacotes</a>
+        </div>
+      </div>
+      <div class="bilhete" aria-label="Cartão de embarque ilustrativo">
+        <div class="corpo">
+          <span class="mono" style="color:var(--cinza)">Cartão de embarque · Vulk</span>
+          <div class="rota" style="margin-top:8px">SSA <span id="ic2"></span> <span class="q" id="destinoGira">LIS</span></div>
+          <dl>
+            <div><dt>Passageiro</dt><dd>Você</dd></div>
+            <div><dt>Portão</dt><dd>Vulk</dd></div>
+            <div><dt>Desde</dt><dd>2010</dd></div>
+          </dl>
+        </div>
+        <div class="canhoto">
+          <div><span class="mono" style="font-size:.62rem;color:var(--cinza)">Assento</span><div style="font-family:var(--serif);font-size:1.6rem;color:var(--petroleo)">1A</div></div>
+          <div class="codigo-barras"></div>
+        </div>
+      </div>
+    </div>
+    <div class="rolar">ROLE</div>
+  </section>
+
+  <div class="letreiro" aria-hidden="true"><div class="trilho">
+    <span>Passagens</span><span>Hotéis</span><span><i>Pacotes</i></span><span>Lazer</span><span>Corporativo</span><span><i>Atendimento personalizado</i></span>
+    <span>Passagens</span><span>Hotéis</span><span><i>Pacotes</i></span><span>Lazer</span><span>Corporativo</span><span><i>Atendimento personalizado</i></span>
+  </div></div>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="wrap">
+      <p class="eyebrow">Por trás da Vulk</p>
+      <p class="frase" id="frase" style="margin-top:28px">Por trás de cada viagem existe planejamento, dedicação e pessoas comprometidas em transformar seus planos em experiências inesquecíveis.</p>
+      <p class="assina">— Equipe Vulk Turismo</p>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA -->
+  <section class="historia" id="historia">
+    <div class="wrap grade">
+      <div class="fixo">
+        <div class="ano"><small>Nossa rota</small><span id="anoNum">2010</span></div>
+        <div class="barra"><i id="barraI"></i><b id="barraB"></b></div>
+      </div>
+      <div class="marcos">
+        <article class="marco" data-ano="2010">
+          <span class="data">24 · março · 2010</span>
+          <h3>A Vulk abre as portas em <em>Salvador.</em></h3>
+          <p>Nasce a Vulk Turismo, agência de viagens baiana feita para planejar junto com o cliente, e não só vender passagem.</p>
+          <figure><img src="img/map.jpg" alt="Mãos planejando uma viagem em um mapa" loading="lazy"></figure>
+        </article>
+        <article class="marco" data-ano="2017">
+          <span class="data">2017 · nas redes</span>
+          <h3>“Viaje sem <em>preocupação.”</em></h3>
+          <p>O lema que a Vulk já usava em 2017 continua valendo: passagens, hotéis e pacotes, de lazer e de trabalho, com atendimento de perto e cuidado com cada detalhe.</p>
+          <figure><img src="img/passport.jpg" alt="Passaporte carimbado" loading="lazy"></figure>
+        </article>
+        <article class="marco" data-ano="2026">
+          <span class="data">Agosto · 2026</span>
+          <h3>Marca nova, <em>mesmo propósito.</em></h3>
+          <p>A Vulk renova a identidade e apresenta quem faz tudo acontecer. Diferentes talentos, um mesmo propósito: cuidar de cada detalhe da sua viagem.</p>
+          <figure><img src="img/equipe-post.jpg" alt="Arte 'Por trás da Vulk' com a equipe" loading="lazy" style="object-position:top"></figure>
+        </article>
+        <article class="marco" data-ano="hoje">
+          <span class="data">Hoje</span>
+          <h3>Manhattan Square, <em>Patamares.</em></h3>
+          <p>Sala 614, Bloco B West, na Av. Luís Viana. Pode vir tomar um café com a gente, ou começar a conversa pelo WhatsApp.</p>
+          <a class="btn btn-ouro" href="sobre.html" style="margin-top:26px;align-self:flex-start">Conheça a Vulk</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="cabeca">
+        <div><p class="eyebrow">O que a Vulk faz</p><h2>Tudo que a sua viagem <em>precisa</em>, num só lugar.</h2></div>
+        <p class="lead" style="max-width:40ch">Você conta o que sonha. A gente pesquisa, compara, reserva e acompanha.</p>
+      </div>
+      <div class="servicos">
+        <div class="servico rv"><div class="n">01</div><h3>Passagens</h3><p>Nacionais e internacionais, no horário que funciona pra você.</p></div>
+        <div class="servico rv d1"><div class="n">02</div><h3>Hotéis</h3><p>Da pousada pé na areia ao hotel ao lado do evento.</p></div>
+        <div class="servico rv d2"><div class="n">03</div><h3>Pacotes</h3><p>Aéreo, hospedagem, passeios e seguro num só roteiro.</p></div>
+        <div class="servico rv d3"><div class="n">04</div><h3>Lazer</h3><p>Férias, lua de mel, viagem com as crianças.</p></div>
+        <div class="servico rv d3"><div class="n">05</div><h3>Corporativo</h3><p>Viagens de equipe, feiras e eventos com faturamento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACOTES EM DESTAQUE -->
+  <section class="sec sec-creme2">
+    <div class="wrap">
+      <div class="cabeca">
+        <div><p class="eyebrow">Pacotes em destaque</p><h2>Para onde vamos <em>dessa vez?</em></h2></div>
+        <a class="btn btn-linha" href="pacotes.html">Todos os pacotes</a>
+      </div>
+      <div class="grade-pacotes" id="destaques"></div>
+    </div>
+  </section>
+
+  <!-- COMO PLANEJAMOS -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="eyebrow">Do planejamento ao embarque</p>
+      <h2 style="margin-top:14px;max-width:18ch">Como a Vulk <em>cuida</em> da sua viagem.</h2>
+      <div class="etapas">
+        <div class="etapa rv"><span class="cod">01 · CHECK-IN</span><h3>Você conta</h3><p>Destino, datas, quem vai e o que não pode faltar. Pelo site ou pelo WhatsApp.</p></div>
+        <div class="etapa rv d1"><span class="cod">02 · ROTA</span><h3>A gente cota</h3><p>Pesquisamos voos, horários e hospedagem e montamos opções que cabem no seu plano.</p></div>
+        <div class="etapa rv d2"><span class="cod">03 · RESERVA</span><h3>Tudo confirmado</h3><p>Reservas, vouchers, seguro e orientação de documentos, num só lugar.</p></div>
+        <div class="etapa rv d3"><span class="cod">04 · EMBARQUE</span><h3>Boa viagem</h3><p>Lembrete de check-in e a equipe por perto se algo mudar no caminho.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINOS CURIOSOS -->
+  <section class="sec sec-creme2" style="padding-bottom:80px">
+    <div class="wrap">
+      <div class="cabeca">
+        <div><p class="eyebrow">Você sabia?</p><h2>O mundo guarda lugares que você <em>nem imagina.</em></h2></div>
+        <a class="btn btn-linha" href="destinos.html">Guia de destinos</a>
+      </div>
+    </div>
+    <div class="faixa" id="faixa"></div>
+  </section>
+
+  <!-- CORPORATIVO -->
+  <section class="corp">
+    <div class="foto" role="img" aria-label="Viajante com mala diante do pôr do sol"></div>
+    <div class="txt">
+      <p class="eyebrow claro">Vulk Corporativo</p>
+      <h2>Sua empresa viaja. <em>A Vulk resolve.</em></h2>
+      <p style="font-size:1.1rem">Equipe indo para feira, diretor com reunião amanhã cedo, remarcação de última hora. Um contato só, cuidando de tudo.</p>
+      <ul>
+        <li><b>01</b>Passagens e hotéis para equipes e grupos</li>
+        <li><b>02</b>Remarcações e imprevistos resolvidos por quem conhece sua conta</li>
+        <li><b>03</b>Faturamento e relatório de gastos por viagem</li>
+      </ul>
+      <a class="btn btn-ouro" href="corporativo.html" style="align-self:flex-start">Atendimento corporativo</a>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS (só aparecem quando houver relatos reais publicados) -->
+  <section class="sec" id="secDepo" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Quem viajou com a Vulk</p>
+      <h2 style="margin:14px 0 50px">Histórias de <em>embarque.</em></h2>
+      <div class="depo" id="depo"></div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="bg" style="background-image:url(img/airport-2.jpg)"></div>
+    <div class="wrap">
+      <p class="eyebrow">Sua próxima viagem começa aqui</p>
+      <h2>Qual será o seu <em>próximo destino?</em></h2>
+      <p class="lead">Conte pra gente em 2 minutos. Um consultor da Vulk responde no WhatsApp com as melhores opções, sem compromisso.</p>
+      <a class="btn btn-ouro" href="cotacao.html">Começar minha cotação</a>
+    </div>
+  </section>
+</main>
+
+<div id="rodape"></div>
+
+<script src="assets/js/data.js?v=20261111010739"></script>
+<script src="assets/js/site.js?v=20261111010739"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const S = window.VULK_SITE, V = window.VULK;
+  document.getElementById('ic1').innerHTML = S.ICONE.seta;
+  document.getElementById('ic1').style.cssText = 'display:inline-flex;width:18px';
+  document.getElementById('ic2').innerHTML = S.ICONE.aviao;
+  document.getElementById('ic2').style.cssText = 'display:inline-flex;width:28px;color:var(--ouro);transform:rotate(90deg)';
+
+  // Bilhete do hero: destino gira entre os códigos dos pacotes
+  const cods = ['LIS', 'FEN', 'MCO', 'CDG', 'SLZ', 'CUN', 'BRC', 'SCL'];
+  let k = 0; const dg = document.getElementById('destinoGira');
+  setInterval(() => { dg.style.opacity = 0; setTimeout(() => { k = (k + 1) % cods.length; dg.textContent = cods[k]; dg.style.opacity = 1; }, 250); }, 2200);
+  dg.style.transition = 'opacity .25s';
+
+  // Pacotes em destaque
+  const pac = V.ler('pacotes').filter(p => p.publicado);
+  const dest = pac.filter(p => p.destaque);
+  document.getElementById('destaques').innerHTML = (dest.length ? dest : pac).slice(0, 3).map(S.cardPacote).join('');
+
+  // Faixa de destinos curiosos
+  document.getElementById('faixa').innerHTML = V.ler('destinos').map(d => `
+    <a class="postal" href="destinos.html#${d.id}">
+      <img src="img/${d.img}.jpg" alt="${d.nome}" loading="lazy">
+      <span class="carimbo">VULK<br>${d.pais.split(',').pop().trim().slice(0, 10).toUpperCase()}</span>
+      <div class="txt"><span class="pais">${d.nome} · ${d.pais}</span><h3>${d.titulo}</h3></div>
+    </a>`).join('');
+
+  // Depoimentos reais
+  const dep = V.ler('depoimentos').filter(d => d.publicado && !d.exemplo);
+  if (dep.length) {
+    document.getElementById('secDepo').hidden = false;
+    document.getElementById('depo').innerHTML = dep.slice(0, 3).map(d => `<blockquote class="rv"><p>“${d.texto}”</p><cite>${d.nome} · ${d.viagem}</cite></blockquote>`).join('');
+  }
+  S.revelar();
+
+  // Manifesto: palavras acendem com a rolagem
+  const fr = document.getElementById('frase');
+  const ouro = ['planejamento,', 'dedicação', 'inesquecíveis.'];
+  fr.innerHTML = fr.textContent.split(' ').map(w => `<span class="w${ouro.includes(w) ? ' ouro' : ''}">${w}</span>`).join(' ');
+  const ws = [...fr.querySelectorAll('.w')];
+
+  // História: ano conta conforme a rolagem
+  const marcos = [...document.querySelectorAll('.marco')];
+  const anoNum = document.getElementById('anoNum'), bI = document.getElementById('barraI'), bB = document.getElementById('barraB');
+  bB.innerHTML = S.ICONE.aviao; bB.style.transform = 'rotate(90deg)';
+  const hist = document.getElementById('historia');
+  const atual = new Date().getFullYear();
+
+  function rolar() {
+    const r = fr.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight * .85 - r.top) / (r.height + innerHeight * .35)));
+    const n = Math.round(p * ws.length);
+    ws.forEach((w, i) => w.classList.toggle('on', i < n));
+
+    const h = hist.getBoundingClientRect();
+    const ph = Math.min(1, Math.max(0, -h.top / (h.height - innerHeight)));
+    bI.style.width = (ph * 100) + '%'; bB.style.left = (ph * 100) + '%';
+    let ano = 2010;
+    marcos.forEach(m => {
+      const mr = m.getBoundingClientRect();
+      const vivo = mr.top < innerHeight * .6 && mr.bottom > innerHeight * .3;
+      m.classList.toggle('vivo', vivo);
+      if (mr.top < innerHeight * (innerWidth < 900 ? .4 : .6)) ano = m.dataset.ano === 'hoje' ? atual : +m.dataset.ano;
+    });
+    if (+anoNum.textContent !== ano) contar(+anoNum.textContent, ano);
+  }
+  let anim;
+  function contar(de, ate) {
+    cancelAnimationFrame(anim); const t0 = performance.now();
+    const passo = (t) => { const q = Math.min(1, (t - t0) / 600); anoNum.textContent = Math.round(de + (ate - de) * q); if (q < 1) anim = requestAnimationFrame(passo); };
+    anim = requestAnimationFrame(passo);
+  }
+  addEventListener('scroll', rolar, { passive: true }); rolar();
+});
+</script>
+</body>
+</html>

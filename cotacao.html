@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotação — Vulk Turismo</title>
+<meta name="description" content="Faça sua cotação de passagem ou pacote com a Vulk Turismo em seis passos rápidos. A proposta chega no seu WhatsApp.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261111010739"><link rel="stylesheet" href="assets/css/paginas.css?v=20261111010739">
+</head>
+<body data-topo="transp">
+<div id="topo"></div>
+
+<section class="page-hero curto">
+  <div class="bg" style="background-image:url(img/passport.jpg)"></div>
+  <div class="wrap">
+    <div class="migalha"><a href="index.html">Início</a> &nbsp;/&nbsp; Cotação</div>
+    <h1>Seu cartão de embarque começa <em>aqui</em></h1>
+    <p class="lead">Seis passos rápidos. Ao final, a cotação vai direto para o WhatsApp da Vulk.</p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:70px">
+  <div class="wrap cotar">
+    <div id="colForm">
+      <form id="formCot" novalidate>
+        <div class="etapas-nav" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <fieldset class="etapa" data-n="1" style="border:0">
+          <div class="etapa-cab"><span class="mono">Etapa 01 de 06</span></div>
+          <h2>Que tipo de <em>viagem</em>?</h2>
+          <div class="opcoes" role="radiogroup" aria-label="Tipo de viagem">
+            <label class="opcao"><input type="radio" name="tipo" value="Ida e volta" checked><span class="caixa"><span class="mono">RT · Round trip</span><b>Ida e volta</b><small>Vai e já sabe quando volta.</small></span></label>
+            <label class="opcao"><input type="radio" name="tipo" value="Somente ida"><span class="caixa"><span class="mono">OW · One way</span><b>Somente ida</b><small>Só o trecho de ida, por enquanto.</small></span></label>
+          </div>
+          <p class="msg-erro" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="etapa" data-n="2" style="border:0">
+          <div class="etapa-cab"><span class="mono">Etapa 02 de 06</span></div>
+          <h2>De onde e para <em>onde</em>?</h2>
+          <div class="grade-campos">
+            <div class="campo"><label for="origem">Origem</label><input id="origem" name="origem" value="Salvador (SSA)" autocomplete="off"></div>
+            <div class="campo"><label for="destino">Destino</label><input id="destino" name="destino" list="sugestoes" placeholder="Cidade, país ou pacote" autocomplete="off"><datalist id="sugestoes"></datalist></div>
+            <p class="campo ajuda todo">Não sabe o destino ainda? Escreva “a definir” e conte a ideia nas observações.</p>
+          </div>
+          <p class="msg-erro" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="etapa" data-n="3" style="border:0">
+          <div class="etapa-cab"><span class="mono">Etapa 03 de 06</span></div>
+          <h2>Quando você quer <em>ir</em>?</h2>
+          <div class="grade-campos">
+            <div class="campo"><label for="ida">Data de ida</label><input id="ida" name="ida" type="date"></div>
+            <div class="campo" id="campoVolta"><label for="volta">Data de volta</label><input id="volta" name="volta" type="date"></div>
+            <p class="campo ajuda todo">Datas flexíveis? Coloque uma aproximada e avise nas observações.</p>
+          </div>
+          <p class="msg-erro" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="etapa" data-n="4" style="border:0">
+          <div class="etapa-cab"><span class="mono">Etapa 04 de 06</span></div>
+          <h2>E a <em>bagagem</em>?</h2>
+          <div class="opcoes" role="radiogroup" aria-label="Bagagem">
+            <label class="opcao"><input type="radio" name="bagagem" value="Despachada" checked><span class="caixa"><span class="mono">BAG · 23 kg</span><b>Despachada</b><small>Mala no porão, além da de mão.</small></span></label>
+            <label class="opcao"><input type="radio" name="bagagem" value="Somente de mão"><span class="caixa"><span class="mono">CABINE</span><b>Só de mão</b><small>Viagem leve, só a mala de bordo.</small></span></label>
+          </div>
+          <p class="msg-erro" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="etapa" data-n="5" style="border:0">
+          <div class="etapa-cab"><span class="mono">Etapa 05 de 06</span></div>
+          <h2>Horário de voo <em>preferido</em></h2>
+          <p style="color:var(--cinza);margin:-10px 0 20px">Pode marcar mais de um. Se tanto faz, siga em frente.</p>
+          <div class="chips" id="horarios"></div>
+          <p class="msg-erro" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="etapa" data-n="6" style="border:0">
+          <div class="etapa-cab"><span class="mono">Etapa 06 de 06</span></div>
+          <h2>Para quem é a <em>cotação</em>?</h2>
+          <div class="grade-campos">
+            <div class="campo todo"><label for="nome">Seu nome</label><input id="nome" name="nome" autocomplete="name"></div>
+            <div class="campo"><label for="whatsapp">WhatsApp</label><input id="whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="(71) 90000-0000"></div>
+            <div class="campo"><label for="passageiros">Passageiros</label>
+              <div class="contador-pax"><button type="button" data-pax="-1" aria-label="Menos um passageiro">−</button><input id="passageiros" name="passageiros" type="number" min="1" max="99" value="1" inputmode="numeric"><button type="button" data-pax="1" aria-label="Mais um passageiro">+</button></div></div>
+            <div class="campo todo"><label for="obs">Observações</label><textarea id="obs" name="obs" rows="3" placeholder="Idade das crianças, hotel desejado, ocasião especial…"></textarea></div>
+          </div>
+          <p class="msg-erro" role="alert"></p>
+        </fieldset>
+
+        <div class="etapa-acoes">
+          <button type="button" class="btn-voltar" id="voltar" hidden>← Voltar</button>
+          <button type="submit" class="btn btn-petroleo" id="avancar" style="margin-left:auto">Continuar</button>
+        </div>
+      </form>
+    </div>
+
+    <aside class="previa" aria-label="Prévia do seu bilhete">
+      <div class="rotulo-previa">Prévia do seu bilhete</div>
+      <div class="bilhete">
+        <div class="corpo">
+          <div class="mono" style="color:var(--cinza)" id="pTipo">Ida e volta</div>
+          <div class="rota"><span id="pOrig">SSA</span><span id="pAviao"></span><span id="pDest" class="vazio-campo">???</span></div>
+          <div class="cidades"><span id="pOrigNome">Salvador</span><span id="pDestNome">Destino</span></div>
+          <dl>
+            <div><dt>Ida</dt><dd id="pIda" class="vazio-campo">—</dd></div>
+            <div id="pVoltaBox"><dt>Volta</dt><dd id="pVolta" class="vazio-campo">—</dd></div>
+            <div><dt>Bagagem</dt><dd id="pBag">Despachada</dd></div>
+            <div style="grid-column:span 2"><dt>Passageiro</dt><dd id="pNome" class="vazio-campo">Seu nome</dd></div>
+            <div><dt>Horário</dt><dd id="pHor" class="vazio-campo">Livre</dd></div>
+          </dl>
+        </div>
+        <div class="canhoto">
+          <div><span class="mono">PAX</span><div class="pax" id="pPax">01</div></div>
+          <div><span class="mono">GATE</span><div class="mono" style="color:var(--petroleo);font-size:.9rem">VULK</div></div>
+          <div class="codigo-barras" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="dica">A Vulk responde no WhatsApp com as opções de voo e hotel. Nenhum pagamento é feito por aqui.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="bg" style="background-image:url(img/airport.jpg)"></div>
+  <div class="wrap">
+    <div class="eyebrow">Prefere conversar?</div>
+    <h2>Fale direto com a <em>Vulk</em>.</h2>
+    <p class="lead">Se a viagem tem muitos detalhes, chame no WhatsApp e explique do seu jeito.</p>
+    <a class="btn btn-ouro" id="zapCta" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+  </div>
+</section>
+
+<div id="rodape"></div>
+<script src="assets/js/data.js?v=20261111010739"></script><script src="assets/js/site.js?v=20261111010739"></script>
+<script src="assets/js/cotacao.js?v=20261111010739"></script>
+</body>
+</html>

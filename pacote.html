@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pacote — Vulk Turismo</title>
+<meta name="description" content="Detalhes do pacote da Vulk Turismo: o que inclui, roteiro dia a dia, melhor época e cotação com saída de Salvador.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261111010739"><link rel="stylesheet" href="assets/css/paginas.css?v=20261111010739">
+</head>
+<body data-topo="transp">
+<div id="topo"></div>
+<main id="conteudo"></main>
+<div id="rodape"></div>
+<script src="assets/js/data.js?v=20261111010739"></script><script src="assets/js/site.js?v=20261111010739"></script>
+<script>
+(function () {
+  const V = window.VULK, S = window.VULK_SITE;
+  const id = new URLSearchParams(location.search).get('id');
+  const lista = V.ler('pacotes').filter((p) => p.publicado);
+  const p = lista.find((x) => x.id === id);
+  const main = document.getElementById('conteudo');
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-width="1.5"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>';
+
+  const cta = `
+  <section class="cta-final">
+    <div class="bg" style="background-image:url(img/business.jpg)"></div>
+    <div class="wrap">
+      <div class="eyebrow">Sua próxima viagem</div>
+      <h2>Começa no <em>planejamento</em>.</h2>
+      <p class="lead">Conte para onde quer ir e quando. A Vulk monta a proposta e manda no seu WhatsApp.</p>
+      <a class="btn btn-ouro" href="cotacao.html${p ? '?pacote=' + encodeURIComponent(p.id) : ''}">Fazer minha cotação</a>
+    </div>
+  </section>`;
+
+  if (!p) {
+    document.body.dataset.topo = 'sempre';
+    main.innerHTML = `
+    <section class="nao-achou"><div class="wrap">
+      <div class="eyebrow" style="justify-content:center">Rota não encontrada</div>
+      <h1>Esse pacote <em>decolou</em> da vitrine.</h1>
+      <p class="lead">O link pode estar antigo ou o pacote saiu do ar. Veja os roteiros disponíveis ou peça uma cotação sob medida.</p>
+      <a class="btn btn-petroleo" href="pacotes.html">Ver todos os pacotes</a>
+    </div></section>` + cta;
+    return;
+  }
+
+  const IATA = { noronha: 'FEN', lencois: 'SLZ', maragogi: 'MCZ', orlando: 'MCO', lisboa: 'LIS', paris: 'CDG', bariloche: 'BRC', santiago: 'SCL', cancun: 'CUN' };
+  const cod = IATA[p.id] || p.titulo.normalize('NFD').replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase();
+  const palavras = esc(p.titulo).split(' ');
+  const ult = palavras.pop();
+  const tituloH1 = (palavras.length ? palavras.join(' ') + ' ' : '') + `<em>${ult}</em>`;
+  document.title = p.titulo + ' — Vulk Turismo';
+  const md = document.querySelector('meta[name="description"]'); if (md) md.content = p.resumo;
+  const zap = S.zapLink(`Olá, Vulk! Vi o pacote "${p.titulo}" (${p.noites} noites) no site e quero uma cotação.`);
+  const temPreco = p.preco != null && p.preco !== '';
+  const outros = lista.filter((x) => x.id !== p.id).sort((a, b) => (b.estilo === p.estilo) - (a.estilo === p.estilo) || (b.regiao === p.regiao) - (a.regiao === p.regiao)).slice(0, 3);
+
+  main.innerHTML = `
+  <section class="page-hero" style="padding-bottom:180px;min-height:70vh">
+    <div class="bg" style="background-image:url(img/${esc(p.img)}.jpg)"></div>
+    <div class="wrap">
+      <div class="migalha"><a href="index.html">Início</a> &nbsp;/&nbsp; <a href="pacotes.html">Pacotes</a> &nbsp;/&nbsp; ${esc(p.titulo)}</div>
+      <h1>${tituloH1}</h1>
+      <p class="lead">${esc(p.destino)}</p>
+    </div>
+  </section>
+
+  <section style="padding-bottom:110px">
+    <div class="wrap detalhe">
+      <div>
+        <article class="bilhete ficha rv" aria-label="Ficha do pacote">
+          <div class="corpo">
+            <div class="mono" style="color:var(--cinza)">Cartão de embarque · ${esc(p.estilo)}</div>
+            <div class="rota"><span>SSA</span>${S.ICONE.aviao}<span>${cod}</span></div>
+            <dl>
+              <div><dt>Destino</dt><dd>${esc(p.destino)}</dd></div>
+              <div><dt>Noites</dt><dd>${String(p.noites).padStart(2, '0')}</dd></div>
+              <div><dt>Estilo</dt><dd>${esc(p.estilo)}</dd></div>
+              <div><dt>Saída</dt><dd>Salvador</dd></div>
+              <div><dt>Região</dt><dd>${p.regiao === 'internacional' ? 'Internacional' : 'Nacional'}</dd></div>
+              <div><dt>Valor</dt><dd>${V.fmtBRL(p.preco)}</dd></div>
+            </dl>
+          </div>
+          <div class="canhoto">
+            <div><span class="mono">Melhor época</span><strong>${esc((p.melhorEpoca || '').split(',')[0])}</strong></div>
+            <div class="codigo-barras" aria-hidden="true"></div>
+          </div>
+        </article>
+
+        <p class="resumo rv">${esc(p.resumo)}</p>
+
+        <div class="bloco rv">
+          <div class="eyebrow">O que inclui</div>
+          <ul class="inclui">${(p.inclui || []).map((i) => `<li>${check}<span>${esc(i)}</span></li>`).join('')}</ul>
+          <p style="margin-top:16px;color:var(--cinza);font-size:.98rem">Os itens podem ser ajustados na cotação: tirar, trocar ou acrescentar.</p>
+        </div>
+
+        <div class="bloco">
+          <div class="eyebrow rv">Roteiro dia a dia</div>
+          <ol class="roteiro">${(p.roteiro || []).map((r, i) => `<li class="rv"><span class="dia">Dia ${String(i + 1).padStart(2, '0')}</span><span class="txt">${esc(r)}</span></li>`).join('')}</ol>
+        </div>
+
+        <div class="bloco rv">
+          <div class="epoca">
+            <div class="sol" aria-hidden="true">ÉPOCA</div>
+            <div><span class="mono">Melhor época para ir</span><p>${esc(p.melhorEpoca || 'A Vulk indica a melhor data na cotação')}</p></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="lateral rv" aria-label="Quero esse pacote">
+        <div class="topo-lat">
+          <span class="mono">${cod} · ${String(p.noites).padStart(2, '0')} noites</span>
+          <h3>${esc(p.titulo)}</h3>
+        </div>
+        <div class="corpo-lat">
+          <div class="valor"><small>${temPreco ? 'A partir de, por pessoa' : 'Valor'}</small>${V.fmtBRL(p.preco)}</div>
+          <a class="btn btn-ouro largo" href="cotacao.html?pacote=${encodeURIComponent(p.id)}">Quero esse pacote ${S.ICONE.seta}</a>
+          <a class="btn btn-zap largo" href="${zap}" target="_blank" rel="noopener">${S.ICONE.zap} Falar no WhatsApp</a>
+          <p class="nota">Datas, hotel e voos são ajustados para você. O valor final vem na proposta, com as formas de pagamento.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  ${outros.length ? `<section class="sec sec-creme2">
+    <div class="wrap">
+      <div class="cabeca"><div><div class="eyebrow">Continue explorando</div><h2 style="margin-top:14px">Outros <em>pacotes</em></h2></div>
+      <p class="lead">Roteiros com o mesmo espírito, todos com saída de Salvador. <a href="pacotes.html" style="color:var(--petroleo);font-weight:500">Ver todos</a></p></div>
+      <div class="grade-pacotes">${outros.map(S.cardPacote).join('')}</div>
+    </div>
+  </section>` : ''}
+  ` + cta;
+})();
+</script>
+</body>
+</html>
